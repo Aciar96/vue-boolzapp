@@ -34,3 +34,29 @@ main{
     max-height: 100%;
     width: 25vw;
   }
+  .notifications {
+    background-color: #8edafc;
+    height: 10%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  
+  .fa-bell-slash {
+    border-radius: 50%;
+    background-color: #fff;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #8edafc;
+  }
+
+  #contacts,
+#chat {
+  overflow-y: scroll;
+  height: 100%;
+  background-color: #fff;
+}

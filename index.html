@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,17 +15,84 @@
     <link rel="stylesheet" href="css/style.css">
     <title>boolzapp</title>
 </head>
+
 <body>
-  <div id="root" >
-    <main class="shadow bg-white ">
-        <div class="row h-100">
-            <!-- sezione contatti -->
-            <section id="contacts" class="col-4"></section>
-            <!-- sezione messaggi -->
-            <section id="chat" class="col-8"></section>
-        </div>
-    </main>
-  </div>
-<script src="js/script.js"></script>
+    <div id="root">
+        <div id="app" class="row">
+          <!-- Contacts -->
+          <div id="contacts" class="col p-0">
+            <!-- User name -->
+            <div class="username d-flex justify-content-between">
+              <div class="d-flex align-items-center">
+                <img :src="`./img/avatar${user.avatar}.jpg`" :alt="user.name" />
+  
+                <div class="h5 ms-2">{{user.name}}</div>
+              </div>
+              <div class="user-icons d-flex">
+                <i class="fa-solid fa-circle-notch mx-2"></i>
+                <i class="fa-solid fa-message mx-2"></i>
+                <i class="fa-solid fa-ellipsis-vertical mx-2"></i>
+              </div>
+            </div>
+            <!-- Notifications -->
+            <div class="notifications">
+              <i class="fa-solid fa-bell-slash"></i>
+              <div class="text ms-3">
+                <div class="h5 m-0">Ricevi notifiche di nuovi messaggi</div>
+                <p class="text-muted">Attiva notifiche desktop</p>
+              </div>
+            </div>
+            <!-- Contacts -->
+            <!-- Search bar -->
+            <div
+              class="search-bar d-flex align-items-center justify-content-center"
+            >
+              <div class="input-group m-3">
+                <span class="input-group-text"
+                  ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+                <input
+                  v-model="searchInput"
+                  @keyup.enter="searchContact()"
+                  type="text"
+                  class="form-control"
+                  placeholder="Cerca o inizia una nuova chat"
+                />
+              </div>
+            </div>
+            <div class="contacts">
+              <!-- Contact -->
+              <div
+                v-for="(contact,index) in filteredContacts"
+                class="contact"
+                @click="setCurrentContact(contact,index,$event)"
+                :class="{'active' : index === currentContact}"
+              >
+                <img
+                  :src="'img/avatar' + contact.avatar + '.jpg'"
+                  :alt="contact.name"
+                />
+                <div class="contact-name h5 ms-3 mb-3">
+                  {{contact.name}}
+                  <div class="d-flex flex-column mt-2">
+                    <p class=" ">
+                      Ultimo accesso{{contact.messages[contact.messages.length -
+                      1].date}}
+                    </p>
+                    <p class="">
+                      {{contact.messages[contact.messages.length - 1].text}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat -->
+          <div id="chat" class="col-8">
+      
+        </main>
+    </div>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
